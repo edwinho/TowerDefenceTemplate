@@ -24,6 +24,8 @@ namespace TowerDefenceTemplate
 
 		public GameObject HealthBar;
 
+        // 加速减速状态
+        private float SpeedMulti = 1f;
 
 		private Transform CurrentWaypoint;
 
@@ -74,10 +76,10 @@ namespace TowerDefenceTemplate
 		{
 			if (!Dead) {
 				Quaternion TargetRotation = Quaternion.LookRotation (CurrentWaypoint.position - transform.position, transform.up);
-				transform.rotation = Quaternion.RotateTowards (transform.rotation, TargetRotation, Time.deltaTime * 100 * Speed);
+				transform.rotation = Quaternion.RotateTowards (transform.rotation, TargetRotation, Time.deltaTime * 100 * Speed * SpeedMulti);
 			}
             
-			transform.position += transform.forward * Time.deltaTime * Speed;
+			transform.position += transform.forward * Time.deltaTime * Speed * SpeedMulti;
 
 			if (Vector3.Distance (transform.position, CurrentWaypoint.position) < 2f) {
 				if ((Waypoints.Length - 1) > WaypointIndex)
@@ -144,7 +146,10 @@ namespace TowerDefenceTemplate
 			Invoke ("Deactivating", 2);
 		}
 
-
-	}
+        void SetSpeedMulti(float speed_multi)
+        {
+            SpeedMulti = speed_multi;
+        }
+    }
 
 }
