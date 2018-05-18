@@ -218,7 +218,7 @@ namespace TowerDefenceTemplate
 		{
 			Flame.emit = true;
 			CurrentTarget.SendMessage ("GetDamage", Damage [Level] * Time.deltaTime);
-            CurrentTarget.SendMessage("SetSpeedMulti", 0.1f);
+            CurrentTarget.SendMessage("SetSpeedMulti", 0.3f);
             if (!gameManager.FlameThrowerSound.isPlaying) gameManager.FlameThrowerSound.Play ();
 		}
 	}

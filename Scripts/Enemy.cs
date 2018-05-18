@@ -27,6 +27,10 @@ namespace TowerDefenceTemplate
         // 加速减速状态
         private float SpeedMulti = 1f;
 
+        private float SlowDownTime = 1.0f;
+
+        private float TimeCounter = 0;
+
 		private Transform CurrentWaypoint;
 
 		private Transform[] Waypoints;
@@ -89,7 +93,15 @@ namespace TowerDefenceTemplate
 					Deactivating ();
 				}
 			}
-		}
+
+            TimeCounter += Time.deltaTime;
+            if (TimeCounter > SlowDownTime)
+            {
+                TimeCounter = 0;
+                SpeedMulti = 1.0f;
+            }
+
+        }
 			
 		IEnumerator SinkInGround ()
 		{
@@ -149,6 +161,7 @@ namespace TowerDefenceTemplate
         void SetSpeedMulti(float speed_multi)
         {
             SpeedMulti = speed_multi;
+            TimeCounter = 0;
         }
     }
 
